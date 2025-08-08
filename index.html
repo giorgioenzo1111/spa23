@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SPA - Tema e Idioma</title>
+    <style>
+        :root {
+            --primary-bg: #ffffff;
+            --secondary-bg: #f8f9fa;
+            --text-color: #333333;
+            --accent-color: #007bff;
+            --border-color: #e9ecef;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+
+        [data-theme="dark"] {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2d2d2d;
+            --text-color: #ffffff;
+            --accent-color: #4dabf7;
+            --border-color: #404040;
+            --shadow: rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header */
+        header {
+            background-color: var(--secondary-bg);
+            padding: 2rem 0;
+            box-shadow: 0 2px 20px var(--shadow);
+            margin-bottom: 3rem;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+
+        .controls {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .control-label {
+            font-weight: 600;
+            color: var(--text-color);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .control-button {
+            padding: 0.8rem 1.2rem;
+            border: 2px solid var(--border-color);
+            border-radius: 25px;
+            background-color: var(--primary-bg);
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            min-width: 80px;
+            justify-content: center;
+        }
+
+        .control-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+            border-color: var(--accent-color);
+        }
+
+        .control-button.active {
+            background-color: var(--accent-color);
+            color: var(--primary-bg);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+
+        /* Main Content */
+        .main-content {
+            background-color: var(--secondary-bg);
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow);
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .welcome-title {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            color: var(--accent-color);
+            font-weight: 300;
+        }
+
+        .welcome-description {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: var(--text-color);
+            opacity: 0.9;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .feature-card {
+            background-color: var(--primary-bg);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-color);
+            box-shadow: 0 8px 30px var(--shadow);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .feature-card p {
+            font-size: 1.1rem;
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+            
+            .main-content {
+                padding: 2rem;
+            }
+            
+            .welcome-title {
+                font-size: 2rem;
+            }
+            
+            .welcome-description {
+                font-size: 1.1rem;
+            }
+            
+            .control-button {
+                padding: 0.6rem 1rem;
+                font-size: 1rem;
+                min-width: 70px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .button-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .control-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo" data-i18n="app.title">Meu SPA</div>
+                
+                <div class="controls">
+                    <div class="control-group">
+                        <div class="control-label" data-i18n="controls.language">Idioma</div>
+                        <div class="button-group">
+                            <button class="control-button active" onclick="changeLanguage('pt')" id="lang-pt">
+                                🇧🇷 Português
+                            </button>
+                            <button class="control-button" onclick="changeLanguage('en')" id="lang-en">
+                                🇺🇸 English
+                            </button>
+                            <button class="control-button" onclick="changeLanguage('es')" id="lang-es">
+                                🇪🇸 Español
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <div class="control-label" data-i18n="controls.theme">Tema</div>
+                        <div class="button-group">
+                            <button class="control-button active" onclick="changeTheme('light')" id="theme-light">
+                                ☀️ <span data-i18n="theme.light">Claro</span>
+                            </button>
+                            <button class="control-button" onclick="changeTheme('dark')" id="theme-dark">
+                                🌙 <span data-i18n="theme.dark">Escuro</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <div class="main-content">
+            <h1 class="welcome-title" data-i18n="home.title">Bem-vindo ao Nosso SPA</h1>
+            <p class="welcome-description" data-i18n="home.description">Este é um exemplo de Single Page Application construída com HTML, CSS e JavaScript puro. Experimente alterar o tema e o idioma - suas preferências serão salvas automaticamente em cookies!</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <span class="feature-icon">🎨</span>
+                    <h3 data-i18n="features.themes.title">Temas Dinâmicos</h3>
+                    <p data-i18n="features.themes.description">Alterne entre tema claro e escuro com transições suaves e design moderno.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🌐</span>
+                    <h3 data-i18n="features.languages.title">Múltiplos Idiomas</h3>
+                    <p data-i18n="features.languages.description">Suporte completo para Português, Inglês e Espanhol com bandeiras dos países.</p>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-icon">🍪</span>
+                    <h3 data-i18n="features.persistence.title">Persistência Local</h3>
+                    <p data-i18n="features.persistence.description">Suas preferências de tema e idioma ficam salvas automaticamente em cookies.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p data-i18n="footer.text">&copy; 2025 Meu SPA. Feito com HTML, CSS e JavaScript.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Translations
+        const translations = {
+            pt: {
+                "app.title": "Meu SPA",
+                "controls.theme": "Tema",
+                "controls.language": "Idioma",
+                "theme.light": "Claro",
+                "theme.dark": "Escuro",
+                "home.title": "Bem-vindo ao Nosso SPA",
+                "home.description": "Este é um exemplo de Single Page Application construída com HTML, CSS e JavaScript puro. Experimente alterar o tema e o idioma - suas preferências serão salvas automaticamente em cookies!",
+                "features.themes.title": "Temas Dinâmicos",
+                "features.themes.description": "Alterne entre tema claro e escuro com transições suaves e design moderno.",
+                "features.languages.title": "Múltiplos Idiomas",
+                "features.languages.description": "Suporte completo para Português, Inglês e Espanhol com bandeiras dos países.",
+                "features.persistence.title": "Persistência Local",
+                "features.persistence.description": "Suas preferências de tema e idioma ficam salvas automaticamente em cookies.",
+                "footer.text": "© 2025 Meu SPA. Feito com HTML, CSS e JavaScript."
+            },
+            en: {
+                "app.title": "My SPA",
+                "controls.theme": "Theme",
+                "controls.language": "Language",
+                "theme.light": "Light",
+                "theme.dark": "Dark",
+                "home.title": "Welcome to Our SPA",
+                "home.description": "This is an example Single Page Application built with pure HTML, CSS and JavaScript. Try changing the theme and language - your preferences will be saved automatically in cookies!",
+                "features.themes.title": "Dynamic Themes",
+                "features.themes.description": "Switch between light and dark themes with smooth transitions and modern design.",
+                "features.languages.title": "Multiple Languages",
+                "features.languages.description": "Complete support for Portuguese, English and Spanish with country flags.",
+                "features.persistence.title": "Local Persistence",
+                "features.persistence.description": "Your theme and language preferences are automatically saved in cookies.",
+                "footer.text": "© 2025 My SPA. Made with HTML, CSS and JavaScript."
+            },
+            es: {
+                "app.title": "Mi SPA",
+                "controls.theme": "Tema",
+                "controls.language": "Idioma",
+                "theme.light": "Claro",
+                "theme.dark": "Oscuro",
+                "home.title": "Bienvenido a Nuestro SPA",
+                "home.description": "Este es un ejemplo de Aplicación de Página Única construida con HTML, CSS y JavaScript puro. ¡Prueba cambiar el tema y el idioma - tus preferencias se guardarán automáticamente en cookies!",
+                "features.themes.title": "Temas Dinámicos",
+                "features.themes.description": "Alterna entre temas claro y oscuro con transiciones suaves y diseño moderno.",
+                "features.languages.title": "Múltiples Idiomas",
+                "features.languages.description": "Soporte completo para Portugués, Inglés y Español con banderas de países.",
+                "features.persistence.title": "Persistencia Local",
+                "features.persistence.description": "Tus preferencias de tema e idioma se guardan automáticamente en cookies.",
+                "footer.text": "© 2025 Mi SPA. Hecho con HTML, CSS y JavaScript."
+            }
+        };
+
+        // Cookie functions
+        function setCookie(name, value, days) {
+            const expires = new Date();
+            expires.setTime(expires.getTime() + (days * 24 * 60 * 60 * 1000));
+            document.cookie = name + '=' + value + ';expires=' + expires.toUTCString() + ';path=/';
+        }
+
+        function getCookie(name) {
+            const nameEQ = name + '=';
+            const ca = document.cookie.split(';');
+            for (let i = 0; i < ca.length; i++) {
+                let c = ca[i];
+                while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+                if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+            }
+            return null;
+        }
+
+        // Theme functions
+        function changeTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            setCookie('theme', theme, 365);
+            
+            // Update button states
+            document.querySelectorAll('.control-button[id^="theme-"]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('theme-' + theme).classList.add('active');
+        }
+
+        function loadTheme() {
+            const savedTheme = getCookie('theme') || 'light';
+            changeTheme(savedTheme);
+        }
+
+        // Language functions
+        function changeLanguage(lang) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang] && translations[lang][key]) {
+                    element.textContent = translations[lang][key];
+                }
+            });
+            
+            setCookie('language', lang, 365);
+            document.documentElement.lang = lang;
+            
+            // Update button states
+            document.querySelectorAll('.control-button[id^="lang-"]').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('lang-' + lang).classList.add('active');
+        }
+
+        function loadLanguage() {
+            const savedLanguage = getCookie('language') || 'pt';
+            changeLanguage(savedLanguage);
+        }
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadTheme();
+            loadLanguage();
+        });
+    </script>
+</body>
+</html>
